@@ -24,13 +24,13 @@ jobs:
         with:
           node-version: 22
 
-      - name: Armar "Armá el Rack del Colegio"
+      - name: 'Armar: Armá el Rack del Colegio'
         working-directory: rack-game
         run: |
           npm ci
           npm run build
 
-      - name: Armar "Misión: Señal Full"
+      - name: 'Armar: Misión Señal Full'
         working-directory: senal-full
         run: |
           npm ci
