@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juegos de redes · Electromecánica</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        color: #e6edf5;
+        background: radial-gradient(ellipse at top, #12304a 0%, #070b11 60%);
+        padding: 4vh 4vw;
+      }
+      main { width: min(1200px, 100%); text-align: center; }
+      .badge {
+        display: inline-block;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: clamp(12px, 1.2vw, 16px);
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.4);
+        background: rgba(56, 189, 248, 0.1);
+        padding: 8px 16px;
+        border-radius: 999px;
+      }
+      h1 {
+        font-size: clamp(36px, 6vw, 84px);
+        line-height: 1;
+        margin: 22px 0 10px;
+        font-weight: 900;
+      }
+      p.lead { font-size: clamp(16px, 1.8vw, 24px); color: #a9bccf; margin: 0 0 5vh; }
+      .games { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+      a.game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 40px 30px;
+        border-radius: 28px;
+        text-decoration: none;
+        color: inherit;
+        background: linear-gradient(180deg, rgba(30, 44, 62, 0.9), rgba(12, 18, 28, 0.95));
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+      }
+      a.game:hover, a.game:focus-visible { transform: translateY(-6px); }
+      a.rack:hover, a.rack:focus-visible { border-color: #22c55e; box-shadow: 0 0 50px rgba(34, 197, 94, 0.3); }
+      a.senal:hover, a.senal:focus-visible { border-color: #38bdf8; box-shadow: 0 0 50px rgba(56, 189, 248, 0.3); }
+      .ico { font-size: clamp(56px, 7vw, 90px); }
+      .game h2 { margin: 0; font-size: clamp(26px, 3vw, 40px); font-weight: 900; }
+      .game p { margin: 0; color: #a9bccf; font-size: clamp(15px, 1.4vw, 19px); line-height: 1.4; }
+      .play {
+        margin-top: 14px;
+        font-weight: 800;
+        font-size: clamp(18px, 1.8vw, 24px);
+        padding: 14px 36px;
+        border-radius: 14px;
+        color: #04140a;
+        background: linear-gradient(180deg, #22c55e, #15803d);
+      }
+      a.senal .play { background: linear-gradient(180deg, #38bdf8, #0284c7); color: #031421; }
+      footer { margin-top: 5vh; color: #6b8299; font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="badge">Orientación Electromecánica · Redes</span>
+      <h1>Juegos de redes</h1>
+      <p class="lead">Elegí tu misión</p>
+      <div class="games">
+        <a class="game rack" href="rack/">
+          <span class="ico">🗄️</span>
+          <h2>Armá el Rack del Colegio</h2>
+          <p>Conectá fibra, ONT, router, switch y patch panel para devolverle Internet a la escuela.</p>
+          <span class="play">▶ JUGAR</span>
+        </a>
+        <a class="game senal" href="senal/">
+          <span class="ico">📶</span>
+          <h2>Misión: Señal Full</h2>
+          <p>Ubicá routers y access points para que todo el colegio tenga buena cobertura Wi-Fi.</p>
+          <span class="play">▶ JUGAR</span>
+        </a>
+      </div>
+      <footer>Funcionan con mouse y pantalla táctil · Recomendado: pantalla completa (F11)</footer>
+    </main>
+  </body>
+</html>

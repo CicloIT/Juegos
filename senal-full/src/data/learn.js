@@ -1,0 +1,68 @@
+// Contenidos del modo aprendizaje (breves, para secundaria).
+// Cada uno tiene una demo en el plano (ver LEARN_DEMOS en game/store.js).
+export const LEARN_ITEMS = [
+  {
+    id: 'coverage',
+    name: 'Cobertura Wi-Fi',
+    icon: '🗺️',
+    what: 'Es el área donde los dispositivos reciben la señal inalámbrica con buena calidad.',
+    how: 'El mapa de calor la muestra: verde excelente, amarillo intermedia, naranja débil, rojo sin cobertura.',
+    try: '👆 Arrastrá el punto de acceso y mirá cómo cambia el mapa.',
+  },
+  {
+    id: 'ap',
+    name: 'Access Point',
+    icon: '📶',
+    what: 'Equipo que da conectividad Wi-Fi a celulares y notebooks y amplía la cobertura inalámbrica.',
+    how: 'Se conecta por cable Ethernet al switch y emite la señal a su alrededor.',
+    try: '👆 Movelo por el pasillo y observá hasta dónde llega.',
+  },
+  {
+    id: 'router',
+    name: 'Router',
+    icon: '🧭',
+    what: 'Conecta la red del colegio con Internet y gestiona el tráfico entre redes.',
+    how: 'Recibe Internet del ONT (donde llega la fibra). Muchos routers también emiten Wi-Fi, pero de alcance corto.',
+    try: '👆 Movelo y fijate que el cable al ONT se estira.',
+  },
+  {
+    id: 'switch',
+    name: 'Switch',
+    icon: '🔀',
+    what: 'Conecta varios dispositivos de la red local y distribuye las conexiones Ethernet.',
+    how: 'Del router sale un cable al switch, y del switch un cable a cada punto de acceso.',
+    try: '👆 Mové el switch: todos los cables a los AP cambian.',
+  },
+  {
+    id: 'eth',
+    name: 'Cable Ethernet',
+    icon: '🔌',
+    what: 'Cable de cobre que une físicamente los equipos de red.',
+    how: 'Tiene un largo máximo práctico: un AP muy lejos del switch necesita mucho cable.',
+    try: '👆 Alejá un AP y mirá cómo crece el cable.',
+  },
+  {
+    id: 'fiber',
+    name: 'Fibra óptica',
+    icon: '💡',
+    what: 'Transmite información mediante pulsos de luz por un hilo de vidrio.',
+    how: 'Llega desde la calle hasta el ONT, en la sala de informática. De ahí sigue por Ethernet.',
+    try: '👀 Mirá la luz viajando desde la vereda hasta el ONT.',
+  },
+  {
+    id: 'interference',
+    name: 'Interferencias',
+    icon: '📡',
+    what: 'Otros aparatos (microondas, otras redes, Bluetooth) que "ensucian" la señal.',
+    how: 'Cerca del microondas de la Dirección la calidad baja aunque el AP esté cerca.',
+    try: '👆 Acercá y alejá el AP del microondas.',
+  },
+  {
+    id: 'walls',
+    name: 'Paredes y obstáculos',
+    icon: '🧱',
+    what: 'Los materiales del edificio atenúan (debilitan) la señal.',
+    how: 'Hormigón −12 dB, ladrillo −7 dB, máquinas −8 dB, durlock −3 dB, vidrio −2 dB. Cada pared cruzada resta.',
+    try: '👆 Pasá el AP de un lado al otro del muro del laboratorio.',
+  },
+];
