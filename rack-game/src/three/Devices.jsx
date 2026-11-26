@@ -64,11 +64,11 @@ function statusOf(deviceId, ledId, g, t) {
     case 'router.net':
       return has('ont-router') ? 'green' : 'red';
     case 'switch.up':
-      return has('router-switch') ? blink(21) : 'off';
+      return g.net.reached.has('switch') ? blink(21) : 'off';
     case 'switch2.pwr':
       return 'green';
     case 'switch2.up':
-      return has('switch-switch') ? blink(19) : 'off';
+      return g.net.reached.has('switch2') ? blink(19) : 'off';
     default:
       return 'off';
   }

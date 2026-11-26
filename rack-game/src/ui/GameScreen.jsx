@@ -3,6 +3,7 @@ import { useGame } from '../game/store.js';
 import { useInteraction } from '../three/interaction.js';
 import { SECTORS, MEDIUM } from '../game/network.js';
 import { LEVELS } from '../game/levels.js';
+import { doneKeys, improvementsFor } from '../game/rules.js';
 import { sfx } from '../audio/sound.js';
 import { HowToSteps } from './Modals.jsx';
 
@@ -89,7 +90,7 @@ const PATH = [
   { key: 'fiber', label: 'Fibra → ONT' },
   { key: 'ont-router', label: 'ONT → WAN router' },
   { key: 'router-switch', label: 'LAN router → Switch' },
-  { key: 'switch-switch', label: 'Switch → Switch 2', needs: 'switch2' },
+  { key: 'switch-switch', label: 'Switch 2 con Internet', needs: 'switch2' },
   { key: 'sectors', label: 'Switch → Sectores' },
 ];
 
@@ -103,7 +104,8 @@ function LeftPanel() {
   const setFocus = useGame((s) => s.setFocusDevice);
   const focus = useGame((s) => s.focusDevice);
   const timer = useRef();
-  const okKeys = new Set(links.filter((l) => l.ok).map((l) => l.key));
+  const net = useGame((s) => s.net);
+  const okKeys = doneKeys(level, links, net);
   const usedFiber = links.filter((l) => l.medium === MEDIUM.FIBER).length;
   const usedEth = links.filter((l) => l.medium === MEDIUM.ETH).length;
   const levelSectors = SECTORS.filter((s) => level.sectors.includes(s.id));
@@ -328,8 +330,9 @@ function Results() {
   }, [s.status]);
   const won = s.status === 'won';
   const used = s.level.time - s.timeLeft;
-  const okKeys = new Set(s.links.filter((l) => l.ok).map((l) => l.key));
+  const okKeys = doneKeys(s.level, s.links, s.net);
   const missing = s.level.required.filter((r) => !okKeys.has(r.key));
+  const tips = won ? improvementsFor(s.links) : [];
   const next = LEVELS.find((l) => l.id === s.level.id + 1);
 
   if (!show) return won ? <div className="win-flash">¡RED ACTIVADA!</div> : null;
@@ -359,6 +362,16 @@ function Results() {
             <div className="speed"><small>Velocidad de enlace</small><Counter to={1000} duration={2200} suffix=" Mbps" /></div>
           )}
         </div>
+        {tips.length > 0 && (
+          <div className="improve">
+            <b>🔧 Funciona, pero se puede mejorar:</b>
+            <ul>
+              {tips.map((t) => (
+                <li key={t.title}><b>{t.title}.</b> {t.text}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         {!won && (missing.length > 0 || s.wrong > 0) && (
           <div className="missing">
             <b>Te faltó:</b>

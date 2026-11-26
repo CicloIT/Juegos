@@ -227,10 +227,16 @@ export default function RackScene() {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
       }}
     >
-      <PerformanceMonitor
-        onDecline={() => setDpr((d) => Math.max(minDpr, +(d - 0.15).toFixed(2)))}
-        onIncline={() => setDpr((d) => Math.min(maxDpr, +(d + 0.1).toFixed(2)))}
-      />
+      {/* En calidad Alta la resolución queda fija: bajarla en caliente redimensiona el
+          canvas (se ve como una "mini recarga") y cada vez se pierde nitidez.
+          En Liviana se adapta, pero se congela tras pocos cambios para no oscilar. */}
+      {!high && (
+        <PerformanceMonitor
+          flipflops={3}
+          onDecline={() => setDpr((d) => Math.max(minDpr, +(d - 0.25).toFixed(2)))}
+          onIncline={() => setDpr((d) => Math.min(maxDpr, +(d + 0.25).toFixed(2)))}
+        />
+      )}
       <fog attach="fog" args={['#070b11', 8, 16]} />
       <Lights shadows={high} />
       <CameraRig />

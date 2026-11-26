@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { validateConnection, computeConnectivity, compatibleTargets, explainWrong } from './rules.js';
+import { validateConnection, computeConnectivity, compatibleTargets, explainWrong, doneKeys } from './rules.js';
 import { levelById } from './levels.js';
 import { MEDIUM, PORT_BY_ID, portsFor } from './network.js';
 import { liveScore, finalScore } from './score.js';
@@ -41,7 +41,7 @@ const derive = (links) => computeConnectivity(links);
 
 // Avance de la instalación según el nivel
 export function progressOf(links, level) {
-  const done = new Set(links.filter((l) => l.ok).map((l) => l.key));
+  const done = doneKeys(level, links, derive(links));
   const correct = level.required.filter((r) => done.has(r.key)).length;
   const wrong = links.filter((l) => !l.ok).length;
   return { correct, wrong, completed: correct === level.required.length && wrong === 0 };

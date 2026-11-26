@@ -69,8 +69,8 @@ export function requiredLinksFor(level) {
     { key: 'fiber', label: 'Fibra → ONT' },
     { key: 'ont-router', label: 'ONT → Router (WAN)' },
     { key: 'router-switch', label: 'Router (LAN) → Switch' },
-    ...(level.devices.includes('switch2') ? [{ key: 'switch-switch', label: 'Switch → Switch 2' }] : []),
-    ...SECTORS.filter((s) => level.sectors.includes(s.id)).map((s) => ({ key: `sector-${s.id}`, label: `Switch → ${s.name}` })),
+    ...(level.devices.includes('switch2') ? [{ key: 'switch-switch', label: 'Switch 2 con Internet' }] : []),
+    ...SECTORS.filter((s) => level.sectors.includes(s.id)).map((s) => ({ key: `sector-${s.id}`, label: `Internet en ${s.name}` })),
   ];
 }
 

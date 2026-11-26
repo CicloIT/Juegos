@@ -50,7 +50,7 @@ export const LEVELS = [
     helpsAllowed: false,
     prewired: [
       { a: 'ont-lan', b: 'rt-lan2', medium: 'eth', ok: false }, // ONT a un LAN en vez del WAN
-      { a: 'pp-2', b: 'rt-lan4', medium: 'eth', ok: false }, // patch directo al router
+      { a: 'pp-2', b: 'ap-eth', medium: 'eth', ok: false }, // patch panel al AP (el patch no reparte)
       { a: 'sw-3', b: 'sw-6', medium: 'eth', ok: false }, // bucle en el switch
       // algunos cables ya están bien puestos
       { a: 'sw2-2', b: 'pp-7', medium: 'eth', ok: true, key: 'sector-gym' },

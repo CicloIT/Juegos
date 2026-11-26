@@ -1,0 +1,282 @@
+{
+  "rack-game/package.json": {
+    "mtime": 1795624920.8356252,
+    "ast_hash": "8dae14aa54c6ba83f1aad5fda3966245",
+    "semantic_hash": ""
+  },
+  "rack-game/src/App.jsx": {
+    "mtime": 1795629177.6672618,
+    "ast_hash": "1f9e3d2e1af0a3c6c2a3ede962276cfe",
+    "semantic_hash": ""
+  },
+  "rack-game/src/audio/sound.js": {
+    "mtime": 1795625017.889923,
+    "ast_hash": "b644e50085d3ca43d221b81d86a6ab9f",
+    "semantic_hash": ""
+  },
+  "rack-game/src/data/components.js": {
+    "mtime": 1795625342.1015613,
+    "ast_hash": "b29b48addff3387144d70ebde7cbbb23",
+    "semantic_hash": ""
+  },
+  "rack-game/src/game/levels.js": {
+    "mtime": 1795696552.8769374,
+    "ast_hash": "12821c493f02c8f8f279fad40635c738",
+    "semantic_hash": ""
+  },
+  "rack-game/src/game/network.js": {
+    "mtime": 1795696539.9020352,
+    "ast_hash": "4a4b8708fa876449dfb35dc00166ed2e",
+    "semantic_hash": ""
+  },
+  "rack-game/src/game/rules.js": {
+    "mtime": 1795696539.9020352,
+    "ast_hash": "712e1681073b67d9ef3ea4ee25e264b0",
+    "semantic_hash": ""
+  },
+  "rack-game/src/game/score.js": {
+    "mtime": 1795629125.3303127,
+    "ast_hash": "a4e9b27f649becc6b74c26d8c2adec43",
+    "semantic_hash": ""
+  },
+  "rack-game/src/game/store.js": {
+    "mtime": 1795696539.9030354,
+    "ast_hash": "7f1a6eb24a839549b0e4bf616230ff99",
+    "semantic_hash": ""
+  },
+  "rack-game/src/main.jsx": {
+    "mtime": 1795625455.812544,
+    "ast_hash": "e347c3e7a17e1f076e3f0a2333819162",
+    "semantic_hash": ""
+  },
+  "rack-game/src/three/Cables.jsx": {
+    "mtime": 1795629485.5499902,
+    "ast_hash": "f27ac13b31747aad0a3c7c3673a5f629",
+    "semantic_hash": ""
+  },
+  "rack-game/src/three/Devices.jsx": {
+    "mtime": 1795696539.904036,
+    "ast_hash": "ee80504c762e4ccfc42118492b9722d3",
+    "semantic_hash": ""
+  },
+  "rack-game/src/three/Port.jsx": {
+    "mtime": 1795629473.5737848,
+    "ast_hash": "f52696badee2c84d3be21c1c1883d89b",
+    "semantic_hash": ""
+  },
+  "rack-game/src/three/RackScene.jsx": {
+    "mtime": 1795696582.2569373,
+    "ast_hash": "d1461af81fb5bf0d8085d631ae54e743",
+    "semantic_hash": ""
+  },
+  "rack-game/src/three/faceTexture.js": {
+    "mtime": 1795629143.2036085,
+    "ast_hash": "273b67abb11720e11ceb9f302f6265b2",
+    "semantic_hash": ""
+  },
+  "rack-game/src/three/interaction.js": {
+    "mtime": 1795629125.3326771,
+    "ast_hash": "d9c9b329581a4d37f05c7180f9c469ca",
+    "semantic_hash": ""
+  },
+  "rack-game/src/three/layout.js": {
+    "mtime": 1795696539.904036,
+    "ast_hash": "36b8b5e0e6c5a8138db3014658dac0ef",
+    "semantic_hash": ""
+  },
+  "rack-game/src/ui/GameScreen.jsx": {
+    "mtime": 1795696563.7176912,
+    "ast_hash": "bad6729d2a40b054716660a86df79c6b",
+    "semantic_hash": ""
+  },
+  "rack-game/src/ui/LearnScreen.jsx": {
+    "mtime": 1795629177.66826,
+    "ast_hash": "1e214faffb8126de2d0423f07741d6d2",
+    "semantic_hash": ""
+  },
+  "rack-game/src/ui/MenuScreen.jsx": {
+    "mtime": 1795629177.666263,
+    "ast_hash": "704d35459dc9ad05be021ba22174141e",
+    "semantic_hash": ""
+  },
+  "rack-game/src/ui/Modals.jsx": {
+    "mtime": 1795629177.666263,
+    "ast_hash": "1b44059ce4c0ee926e2444cab28a291d",
+    "semantic_hash": ""
+  },
+  "rack-game/vite.config.js": {
+    "mtime": 1795625455.795049,
+    "ast_hash": "aa711e387550968970ba3e95b8d2ff20",
+    "semantic_hash": ""
+  },
+  "senal-full/package.json": {
+    "mtime": 1795628788.8688262,
+    "ast_hash": "a2bb785750bb32586a56f861743e2df9",
+    "semantic_hash": ""
+  },
+  "senal-full/src/App.jsx": {
+    "mtime": 1795630433.897342,
+    "ast_hash": "02e5da81a864ee64a9d3cb44e4f7b13d",
+    "semantic_hash": ""
+  },
+  "senal-full/src/audio/sound.js": {
+    "mtime": 1795627770.136076,
+    "ast_hash": "7cbe07d4dd162775cd49f88e12c1a41c",
+    "semantic_hash": ""
+  },
+  "senal-full/src/data/learn.js": {
+    "mtime": 1795627967.9603846,
+    "ast_hash": "0aad7e4f9ca60a99eb76d34338a010e3",
+    "semantic_hash": ""
+  },
+  "senal-full/src/game/advice.js": {
+    "mtime": 1795630405.1163344,
+    "ast_hash": "a95eea828fb514862de538a6c78d5e17",
+    "semantic_hash": ""
+  },
+  "senal-full/src/game/devices.js": {
+    "mtime": 1795627720.7601187,
+    "ast_hash": "a431a85a9dddd7d9306bb2ace16fad5c",
+    "semantic_hash": ""
+  },
+  "senal-full/src/game/levels.js": {
+    "mtime": 1795630405.1143339,
+    "ast_hash": "902abcea0bf013cf80f334b26f544e50",
+    "semantic_hash": ""
+  },
+  "senal-full/src/game/maps.js": {
+    "mtime": 1795629987.1870513,
+    "ast_hash": "0c89a1b61ba00002560ea7f2d090559a",
+    "semantic_hash": ""
+  },
+  "senal-full/src/game/materials.js": {
+    "mtime": 1795627556.6254046,
+    "ast_hash": "9f9e9794f309791bc5d8d91b62bc9903",
+    "semantic_hash": ""
+  },
+  "senal-full/src/game/network.js": {
+    "mtime": 1795627586.2933116,
+    "ast_hash": "f6882cd3e81ec7bee2a5e10fac9b4cee",
+    "semantic_hash": ""
+  },
+  "senal-full/src/game/score.js": {
+    "mtime": 1795627721.8122103,
+    "ast_hash": "407bab1612f60532d5f96c3bc758fda3",
+    "semantic_hash": ""
+  },
+  "senal-full/src/game/signal.js": {
+    "mtime": 1795630405.1153338,
+    "ast_hash": "78512ea750d2dd22780da198d6a75600",
+    "semantic_hash": ""
+  },
+  "senal-full/src/game/store.js": {
+    "mtime": 1795630405.1163344,
+    "ast_hash": "ca4f2976834877027bfd67492ec577cb",
+    "semantic_hash": ""
+  },
+  "senal-full/src/main.jsx": {
+    "mtime": 1795628050.20745,
+    "ast_hash": "e347c3e7a17e1f076e3f0a2333819162",
+    "semantic_hash": ""
+  },
+  "senal-full/src/three/Coverage.jsx": {
+    "mtime": 1795627910.643351,
+    "ast_hash": "0cb414ab659250cc8a7bb450b99f3e2f",
+    "semantic_hash": ""
+  },
+  "senal-full/src/three/Devices.jsx": {
+    "mtime": 1795627910.863336,
+    "ast_hash": "90f60b46eed6bd67eb740f6f43c115a4",
+    "semantic_hash": ""
+  },
+  "senal-full/src/three/Scene.jsx": {
+    "mtime": 1795696582.2784986,
+    "ast_hash": "3138c2349950bdf39da54d05ce5bd12c",
+    "semantic_hash": ""
+  },
+  "senal-full/src/three/School.jsx": {
+    "mtime": 1795628779.300087,
+    "ast_hash": "be9d6c2aa8c9a33d52660a7f8632f726",
+    "semantic_hash": ""
+  },
+  "senal-full/src/three/placement.js": {
+    "mtime": 1795630433.8933368,
+    "ast_hash": "402c72906a3e024be0e60a0bb23fe8a2",
+    "semantic_hash": ""
+  },
+  "senal-full/src/three/textures.js": {
+    "mtime": 1795627820.0123272,
+    "ast_hash": "cca14ccb87847e474e4f01d99680ea3a",
+    "semantic_hash": ""
+  },
+  "senal-full/src/ui/GameScreen.jsx": {
+    "mtime": 1795630446.6664894,
+    "ast_hash": "170e47dc68fe70a000040aba501ac83b",
+    "semantic_hash": ""
+  },
+  "senal-full/src/ui/LearnScreen.jsx": {
+    "mtime": 1795630433.8963425,
+    "ast_hash": "1854a15ed90d819f5454b51e8e9eab36",
+    "semantic_hash": ""
+  },
+  "senal-full/src/ui/MenuScreen.jsx": {
+    "mtime": 1795630433.895342,
+    "ast_hash": "64695095f855ee46ca9731ff980cb3b8",
+    "semantic_hash": ""
+  },
+  "senal-full/src/ui/Modals.jsx": {
+    "mtime": 1795630433.897342,
+    "ast_hash": "dd05bdcde0f31c8f1b97494a63fdea7d",
+    "semantic_hash": ""
+  },
+  "senal-full/vite.config.js": {
+    "mtime": 1795627248.623675,
+    "ast_hash": "aa711e387550968970ba3e95b8d2ff20",
+    "semantic_hash": ""
+  },
+  ".github/workflows/publicar.yml": {
+    "mtime": 1795631125.9959629,
+    "ast_hash": "5dbba2151a6a6f18457e08a032ab5f43",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1795630927.00185,
+    "ast_hash": "66474957d23d056beae26c7db5b0d31a",
+    "semantic_hash": ""
+  },
+  "Rack.md": {
+    "mtime": 1795624147.804287,
+    "ast_hash": "bc0aaf4e0ad6eb05998e62448b3dd50c",
+    "semantic_hash": ""
+  },
+  "Se\u00f1alfull.md": {
+    "mtime": 1795624191.87708,
+    "ast_hash": "c0517dddec57ad4769540379e1a309a4",
+    "semantic_hash": ""
+  },
+  "portada/index.html": {
+    "mtime": 1795630923.8251987,
+    "ast_hash": "a17bc9147b1281b4577193da1150ddd8",
+    "semantic_hash": ""
+  },
+  "rack-game/README.md": {
+    "mtime": 1795629530.9104998,
+    "ast_hash": "ecb1cb65ab018e6fac22607eba32ae83",
+    "semantic_hash": ""
+  },
+  "rack-game/index.html": {
+    "mtime": 1795625455.765459,
+    "ast_hash": "0b5b997d8bdd7ebd793afac1aa94e595",
+    "semantic_hash": ""
+  },
+  "senal-full/README.md": {
+    "mtime": 1795630487.7394722,
+    "ast_hash": "0f74efa5b924808ec8e2b19b0764d945",
+    "semantic_hash": ""
+  },
+  "senal-full/index.html": {
+    "mtime": 1795628050.2349882,
+    "ast_hash": "c4ad8e26558fac72b670d47b97beaf01",
+    "semantic_hash": ""
+  }
+}

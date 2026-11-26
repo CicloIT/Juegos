@@ -78,6 +78,7 @@ export const CABLE_COLORS = {
   fiber: '#ffd21f',
   'ont-router': '#2f7dff',
   'router-switch': '#22c55e',
+  'router-switch2': '#22c55e',
   'sector-aula1': '#f97316',
   'sector-aula2': '#e11d48',
   'sector-lab': '#a855f7',

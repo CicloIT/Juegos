@@ -980,6 +980,25 @@ body,
   margin: 6px 0 0;
   columns: 2;
 }
+.improve {
+  text-align: left;
+  font-size: 18px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 14px;
+  padding: 14px 20px;
+  margin-bottom: 22px;
+  max-height: 32vh;
+  overflow-y: auto;
+}
+.improve ul {
+  margin: 6px 0 0;
+  padding-left: 22px;
+}
+.improve li {
+  margin: 6px 0;
+  line-height: 1.35;
+}
 .res-buttons {
   display: flex;
   gap: 16px;

@@ -3,20 +3,56 @@
 import { PORT_BY_ID, ROLE, MEDIUM, SECTORS } from './network.js';
 
 // Pares de roles permitidos (sin importar el orden) y su medio.
+// Se aceptan también conexiones que funcionan aunque no sean las más prolijas
+// (router directo al AP o al patch panel, router a los dos switches): al terminar
+// se explican como mejoras posibles (ver improvementsFor).
 const ALLOWED = [
   { a: ROLE.ODF, b: ROLE.ONT_PON, medium: MEDIUM.FIBER, key: () => 'fiber' },
   { a: ROLE.ONT_LAN, b: ROLE.WAN, medium: MEDIUM.ETH, key: () => 'ont-router' },
-  { a: ROLE.LAN, b: ROLE.SWITCH, medium: MEDIUM.ETH, key: () => 'router-switch' },
+  { a: ROLE.LAN, b: ROLE.SWITCH, medium: MEDIUM.ETH, key: (pa, pb) => (devOf(pa, pb, ROLE.SWITCH) === 'switch2' ? 'router-switch2' : 'router-switch') },
   { a: ROLE.SWITCH, b: ROLE.PATCH, medium: MEDIUM.ETH, key: (pa, pb) => sectorKey(pa, pb) },
-  { a: ROLE.SWITCH, b: ROLE.AP, medium: MEDIUM.ETH, key: () => 'sector-patio' },
+  { a: ROLE.SWITCH, b: ROLE.AP, medium: MEDIUM.ETH, key: (pa, pb) => sectorKey(pa, pb) },
+  { a: ROLE.LAN, b: ROLE.PATCH, medium: MEDIUM.ETH, key: (pa, pb) => sectorKey(pa, pb) },
+  { a: ROLE.LAN, b: ROLE.AP, medium: MEDIUM.ETH, key: (pa, pb) => sectorKey(pa, pb) },
   // switches en cascada (sólo entre switches distintos; el mismo switch se rechaza antes)
   { a: ROLE.SWITCH, b: ROLE.SWITCH, medium: MEDIUM.ETH, key: () => 'switch-switch' },
 ];
 
+const devOf = (pa, pb, role) => (pa.role === role ? pa.device : pb.device);
+
 function sectorKey(pa, pb) {
-  const term = pa.role === ROLE.SWITCH ? pb : pa;
+  const term = pa.role === ROLE.PATCH || pa.role === ROLE.AP ? pa : pb;
   const s = SECTORS.find((x) => x.terminal === term.id);
   return s ? `sector-${s.id}` : null;
+}
+
+// Nodo lógico de un puerto: cada puerto del patch panel es un nodo propio
+// (representa un cable que va a un sector distinto).
+const nodeOf = (portId) => {
+  const pt = PORT_BY_ID[portId];
+  return pt.device === 'patch' ? portId : pt.device;
+};
+
+// ¿Los dos nodos ya están unidos por cables correctos? Entonces otro cable cerraría un bucle.
+function alreadyConnected(links, x, y) {
+  const adj = new Map();
+  const add = (u, v) => {
+    if (!adj.has(u)) adj.set(u, []);
+    adj.get(u).push(v);
+  };
+  for (const l of links) {
+    if (!l.ok) continue;
+    add(nodeOf(l.a), nodeOf(l.b));
+    add(nodeOf(l.b), nodeOf(l.a));
+  }
+  const seen = new Set([x]);
+  const queue = [x];
+  while (queue.length) {
+    const n = queue.shift();
+    if (n === y) return true;
+    for (const m of adj.get(n) || []) if (!seen.has(m)) { seen.add(m); queue.push(m); }
+  }
+  return false;
 }
 
 function findRule(pa, pb) {
@@ -73,12 +109,13 @@ export function validateConnection(aId, bId, cable, links) {
 
   const rule = findRule(pa, pb);
   if (rule) {
-    // Restricciones de cantidad
-    if (rule.a === ROLE.LAN && links.some((l) => l.ok && l.key === 'router-switch')) {
-      return fail('dup', 'Enlace repetido', 'El router ya está conectado al switch. Con un enlace alcanza.', 'Usá los puertos libres del switch para llegar a los sectores.');
-    }
-    if (rule.a === ROLE.SWITCH && rule.b === ROLE.SWITCH && links.some((l) => l.ok && l.key === 'switch-switch')) {
-      return fail('dup', 'Enlace repetido', 'Los dos switches ya están unidos. Un segundo cable entre ellos formaría un bucle.', 'Usá los puertos libres para llegar a los sectores.');
+    // Un segundo camino entre equipos que ya están unidos forma un bucle.
+    if (alreadyConnected(links, nodeOf(aId), nodeOf(bId))) {
+      const both = [pa.device, pb.device].sort().join('+');
+      const text = both === 'switch+switch2'
+        ? 'Los dos switches ya están unidos (directo o a través del router). Otro cable entre ellos formaría un bucle y la red se satura.'
+        : `El ${nameOf(pa)} y el ${nameOf(pb)} ya están conectados por otro camino. Un segundo cable formaría un bucle y la red se satura.`;
+      return fail('loop', '¡Bucle!', text, 'Con un solo camino entre dos equipos alcanza. Usá los puertos libres para llegar a los sectores.');
     }
     const key = rule.key(pa, pb);
     return { ok: true, key };
@@ -86,6 +123,9 @@ export function validateConnection(aId, bId, cable, links) {
 
   return fail('topology', ...explainTopology(pa, pb));
 }
+
+const NAMES = { router: 'router', switch: 'switch', switch2: 'switch 2', ap: 'punto de acceso', patch: 'patch panel', ont: 'ONT', odf: 'entrada de fibra' };
+const nameOf = (pt) => NAMES[pt.device] || pt.device;
 
 function fail(kind, title, text, hint, counts = true) {
   return { ok: false, kind, title, text, hint, counts };
@@ -106,11 +146,6 @@ function explainTopology(pa, pb) {
     return ['Falta el router',
       'El ONT entrega Internet al router. El router es el que administra la red y la reparte.',
       'Conectá la salida LAN del ONT al puerto WAN del router.'];
-  }
-  if (has(pa, pb, ROLE.LAN, ROLE.PATCH) || has(pa, pb, ROLE.LAN, ROLE.AP)) {
-    return ['Usá el switch',
-      'El switch permite distribuir la conexión hacia diferentes equipos.',
-      'Conectá un LAN del router al switch, y desde el switch a los sectores.'];
   }
   if (has(pa, pb, ROLE.PATCH, ROLE.PATCH) || has(pa, pb, ROLE.PATCH, ROLE.AP)) {
     return ['El patch panel no reparte',
@@ -137,10 +172,6 @@ function explainTopology(pa, pb) {
  * propio (representa un cable que va a un sector distinto).
  */
 export function computeConnectivity(links) {
-  const nodeOf = (portId) => {
-    const pt = PORT_BY_ID[portId];
-    return pt.device === 'patch' ? portId : pt.device;
-  };
   const adj = new Map();
   const add = (x, y) => {
     if (!adj.has(x)) adj.set(x, []);
@@ -191,4 +222,56 @@ export function explainWrong(aId, bId) {
   if (pa.device === pb.device && pa.role === ROLE.SWITCH) return ['¡Era un bucle!', 'Unir dos puertos del mismo switch crea un bucle y la red se satura.'];
   const [title, text] = explainTopology(pa, pb);
   return [title, text];
+}
+
+/**
+ * Qué pasos de la instalación están cumplidos (claves de level.required).
+ * Se mide por conectividad real, no por un cableado único: cualquier camino que
+ * funcione vale.
+ */
+export function doneKeys(level, links, net) {
+  const done = new Set();
+  const okKeys = new Set(links.filter((l) => l.ok).map((l) => l.key));
+  if (okKeys.has('fiber')) done.add('fiber');
+  if (okKeys.has('ont-router')) done.add('ont-router');
+  if (net.reached.has('switch')) done.add('router-switch');
+  if (net.reached.has('switch2')) done.add('switch-switch');
+  for (const s of SECTORS) if (net.sectors[s.id] === 'green') done.add(`sector-${s.id}`);
+  return done;
+}
+
+/**
+ * Mejoras posibles de una instalación que funciona: conexiones válidas pero
+ * no ideales. Devuelve [{title, text}].
+ */
+export function improvementsFor(links) {
+  const ok = links.filter((l) => l.ok);
+  const roles = (l) => [PORT_BY_ID[l.a], PORT_BY_ID[l.b]];
+  const out = [];
+
+  const direct = ok.filter((l) => {
+    const [pa, pb] = roles(l);
+    return has(pa, pb, ROLE.LAN, ROLE.PATCH) || has(pa, pb, ROLE.LAN, ROLE.AP);
+  });
+  if (direct.length) {
+    const names = direct.map((l) => SECTORS.find((s) => `sector-${s.id}` === l.key)?.name).filter(Boolean);
+    out.push({
+      title: `Router directo a ${names.join(', ')}`,
+      text: 'Funciona, porque el router trae unos pocos puertos LAN. Pero lo prolijo es que el router salga a un switch y el switch reparta a los sectores: el router administra la red, el switch la distribuye, y así quedan puertos libres en el router.',
+    });
+  }
+
+  const toSwitches = ok.filter((l) => l.key === 'router-switch' || l.key === 'router-switch2');
+  if (toSwitches.length > 1) {
+    out.push({
+      title: 'El router alimenta a los dos switches',
+      text: 'Funciona, pero lo más ordenado es una sola salida del router a un switch principal y, desde ahí, el segundo switch en cascada. La red queda más fácil de seguir y el router conserva puertos libres.',
+    });
+  } else if (toSwitches.length === 1 && toSwitches[0].key === 'router-switch2' && ok.some((l) => l.key === 'switch-switch')) {
+    out.push({
+      title: 'El router entra por el Switch 2',
+      text: 'Funciona igual, pero por convención el router se conecta al switch principal (el de arriba) y el Switch 2 cuelga de él. Así cualquier técnico entiende la red de un vistazo.',
+    });
+  }
+  return out;
 }
